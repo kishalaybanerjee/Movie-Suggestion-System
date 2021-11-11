@@ -1,8 +1,5 @@
 
-```{r, echo = FALSE}
-library(knitr)
-#knitr::opts_chunk$set(fig.path = "Figures/EDA/EDA-")
-```
+
 
 # Movie Recommendation System
 
@@ -30,26 +27,57 @@ Our dataset contains 8807 entries with 12 features. Some are free-text, containi
 
 The following are some summaries for the more discrete features of the data:
 
-```{r, echo = FALSE}
-print("Type")
-table(netflix_data$type)
+
 ```
-```{r, echo = FALSE}
-print("Country")
-head(sort(table(netflix_data$country), decreasing = TRUE))
+## [1] "Type"
 ```
-```{r, echo = FALSE}
-print("Age Rating")
-sort(table(netflix_data$rating), decreasing = TRUE)
+
+```
+## Error in table(netflix_data$type): object 'netflix_data' not found
+```
+
+```
+## [1] "Country"
+```
+
+```
+## Error in table(netflix_data$country): object 'netflix_data' not found
+```
+
+```
+## [1] "Age Rating"
+```
+
+```
+## Error in table(netflix_data$rating): object 'netflix_data' not found
 ```
 
 It would be useful to obtain similar breakdowns for fields like genre or cast, which almost always contain multiple categories or actors. This will be my next aim.
 
 Before that, however, the age rating feature clearly has erroneous entries, as time-values like "84 min", "74 min", etc almost definitely belong in the duration column. It will be simple to find these and correct them, but this also serves as a reminder that we should naturally keep an eye out for any other mistakes in the dataset:
 
-```{r}
+
+```r
 error_indices = which(netflix_data$rating == "84 min" | netflix_data$rating == "74 min" | netflix_data$rating == "66 min")
+```
+
+```
+## Error in which(netflix_data$rating == "84 min" | netflix_data$rating == : object 'netflix_data' not found
+```
+
+```r
 netflix_data[error_indices, c("duration", "rating")] = netflix_data[error_indices, c("rating", "duration")]
+```
+
+```
+## Error in eval(expr, envir, enclos): object 'netflix_data' not found
+```
+
+```r
 netflix_data[error_indices,]
+```
+
+```
+## Error in eval(expr, envir, enclos): object 'netflix_data' not found
 ```
 
