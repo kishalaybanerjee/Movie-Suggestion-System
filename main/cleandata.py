@@ -25,7 +25,6 @@ def removeNullValues(df):
 
 
 def convertCellValuesToList(df):
-
     for cols in df.columns:
         if df[cols].dtypes != 'int64' and cols != 'show_id':
             df[cols] = df[cols].str.split(',')
@@ -34,6 +33,7 @@ def convertCellValuesToList(df):
 
 
 def createDataDict(df):
+    df = convertCellValuesToList(removeNullValues(df))
 
     keyList = list(df['show_id'])
     dataDict = {}
@@ -52,7 +52,6 @@ if __name__ == '__main__':
 
     path = './netflix_titles.csv'
     df = pd.read_csv(path, header=0)
-    df = convertCellValuesToList(removeNullValues(df))
     dataDict = createDataDict(df)
 
     with open('./data.json', 'w') as fp:
