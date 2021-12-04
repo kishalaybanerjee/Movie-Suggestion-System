@@ -45,6 +45,15 @@ def createDataDict(df):
             rowDict[names] = row[names]
         dataDict[keyList[idx]] = rowDict
 
+    return getShowNamesInCorrectFormat(dataDict)
+
+
+def getShowNamesInCorrectFormat(dataDict):
+    showList = list(dataDict)
+    for shows in showList:
+        name = " ".join(dataDict[shows]['title'])
+        dataDict[shows]['title'] = name
+
     return dataDict
 
 
