@@ -13,7 +13,7 @@ def convertNoneTypeToString(value):
     return value if value else ''
 
 
-def getShowDetails(dataPath, jsonPath):
+def getShowRecommendations(dataPath, jsonPath):
     dataDict = filterDataDict(parseDataIntoDict(dataPath))
     showSimilarityDict = getSimilarityDict(jsonPath)
 
@@ -31,8 +31,9 @@ def getShowDetails(dataPath, jsonPath):
             simShow = [dataDict[keyList[0]]['title'], dataDict[keyList[1]]['title'], dataDict[keyList[2]]['title']]
         else:
             simShow = [dataDict[keyList[0]]['title'], None, None]
-    except KeyError:
-        print(f'Could not find similar shows to {name} based on cast. Please try again')
+    except (IndexError, KeyError):
+        # returns the string instead of just printing to handle the unbound local error of simShow when exception is hit
+        return print(f'Could not find similar shows to {name} based on cast. Please try again')
 
     # handler to prevent printing None when there are less than 3 similar shows
     simShow = [convertNoneTypeToString(i) for i in simShow]
@@ -45,7 +46,7 @@ if __name__ == '__main__':
 
     dataPath = './netflix_titles.csv'
     jsonPath = './show_similarities.json'
-    getShowDetails(dataPath, jsonPath)
+    getShowRecommendations(dataPath, jsonPath)
 
     # TODO: Add user input for show name instead of random.choice (need to know the names in the database?)
     # TODO: Check the value of the highest similarity before reporting, if max is less than 0.25 (example), is there any point in reporting?

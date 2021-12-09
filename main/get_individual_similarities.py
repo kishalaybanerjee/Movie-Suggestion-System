@@ -10,8 +10,8 @@ def computeCastSimilarity(dataDict, show1, show2):
 def createShowComparisonsBasedOnCast(inPath):
     """
     The 0 < computeCastSimilarity < 1 condition is deceptively important. When I ran this function without it, the
-    output was 885MB, with the majority having a JS = 0.
-    The condition pruned it down to 1.8MB, a ~500 times decrease. Running time for both approximately the same
+    output was 885 MB, with the majority having a JS = 0.
+    The condition pruned it down to 1.8 MB, a ~500 times decrease.
     """
     dataDict = filterDataDict(parseDataIntoDict(inPath))
     showList = list(dataDict.keys())
