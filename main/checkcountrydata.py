@@ -12,25 +12,30 @@ def readDataFile(inPath):
 def getCountryData(inPath):
     dataDict = readDataFile(inPath)
     countryData = [dataDict[k]['country'] for k in dataDict.keys()]
-    # creating a list of unique country names
-    # not removing unknown since it is needed for comparison; empty string needs to be removed from this list
-    countryList = [x.lower() for x in list(filter(None, set(chain(*countryData))))]
+    # creating a list of unique country names and cleaning the data
+    countryList = cleanCountryData(countryData)
     return [reformatCountryNames(x) for x in countryList]
 
 
+def cleanCountryData(dataList):
+    countryList = list(filter(None, set(chain(*dataList))))
+    countryList = list(set(removeWhitespaceInStrings(countryList)))
+    countryList = [x.lower() for x in countryList]
+    return [x for x in countryList if 'unknown' not in x]
+
+
 def createCountryInfoDict(inPath):
-    countryList = removeWhitespaceInStrings(getCountryData(inPath))
+    countryList = getCountryData(inPath)
     return {x: [CountryInfo(x).capital(), CountryInfo(x).info()['capital_latlng'][0],
                 CountryInfo(x).info()['capital_latlng'][1]] for x in countryList}
 
 
 def removeWhitespaceInStrings(wordList):  # to handle cases when the country name has a leading or trailing space,
-    # observed for ' slovenia'
     return [x.strip() for x in wordList]
 
 
 def reformatCountryNames(name):
-    if name == 'east germany':
+    if name == 'east germany' or name == 'west germany':
         return 'germany'
     if name == 'vatican city':
         return 'italy'
@@ -38,6 +43,10 @@ def reformatCountryNames(name):
         return 'serbia'
     if name == 'soviet union':
         return 'russia'
+    if name == 'bahamas':
+        return 'the bahamas'
+    if name == 'palestine':
+        return 'israel'
     return name
 
 
