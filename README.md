@@ -51,11 +51,27 @@ unavailable, I have removed those keys from the dictionary. Later work could inc
 3. The keys of the outer dictionary are the show_id values, and each inner dictionary are the shows which have a non-zero
 Jaccard Similarity with that particular show. While generating this dictionary, I only considered non-zero similarities,
 which was not only logical, but also very important from a practical point of view.
-4. Not really a new point, but I really like the dictionary comprehension I used for this! ;)
+4. Not really a new point, but I really like the dictionary comprehension I used for this! 😉
 5. Recommendations are generated in the imaginatively named generate_recommendations.py script. To simulate how users would
 watch a particular show and expect recommendations based on that, I have added a line to choose a show at random and generate
 recommendations for that.
 6. I have been generating 3 recommendations for each choice, and in cases where 3 don't exist, I have added handlers to
 take care of those scenarios.
 
-I am currently working on looking at the country data for recommendations, and I will be updating this Readme as I progress further. 
+~~I am currently working on looking at the country data for recommendations, and I will be updating this Readme as I progress further. 
+
+
+## **Recommendations Based On Country**
+
+Similar to before, I am trying to generate recommendations based on the **Country data**. I have started this work on the country-similarity branch. 
+
+Some points that I have in mind while working - 
+1. Using Country only isn't very useful for generating correct recommendations.
+2. If movie B is recommended after watching movie A, solely because both have USA as a location, that recommendation will be wrong, more often than not, because the two may be different in every other conceivable manner. 
+3. Thus, I am toying with the idea of using a different column (maybe cast, since quite a bit of work on that is done already) to filter other movies with same location/country, given a particular choice. 
+4. In a real-world scenario, the best option would be to carry out a sentiment analysis on the data in the **Description** column for shows from same countries, and then choose those closest in similarity based on that. 
+
+At the moment, I am using a Python module called countryinfo to generate a dataset of countries with some specific data for each (currently using capital, latitude of capital and longitude of capital). The module doesn't cater for some places like the Vatican City, so I have had to build in handlers (replacing it with Italy). The data itself also contains some archaic country names like Soviet Union and West Germany, which I replaced with Russia and Germany.
+
+I am currently working on choosing shows from the same country, and using the **Cast** data, and using the work in checkcountrydata.py to find 'close' locations, where exact country matches are unavailable. As always, I will be updating this as I progress.
+
