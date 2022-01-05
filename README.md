@@ -58,5 +58,4 @@ recommendations for that.
 6. I have been generating 3 recommendations for each choice, and in cases where 3 don't exist, I have added handlers to
 take care of those scenarios.
 
-I am currently working on looking at the country data for recommendations, and there is also a lot of scope for refinement
-of this work.
+I am currently working on looking at the country data for recommendations, and I will be updating this Readme as I progress further. 
