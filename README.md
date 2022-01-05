@@ -33,7 +33,7 @@ The cleandata.py script in the data-cleaning and text-similarity branches contai
 
 ## **Recommendations Based On Cast**
 
-The first column to be tackled was the 'Cast' column. The aim was to generate a set of recommendations based on a
+The first column to be tackled was the **Cast** column. The aim was to generate a set of recommendations based on a
 chosen movie/show, solely based on cast. The work done on this column can be found on the text-similarity branch.
 
 The metric used to calculate similarity between shows based on cast was the Jaccard Similarity. There are some obvious
@@ -58,7 +58,7 @@ recommendations for that.
 6. I have been generating 3 recommendations for each choice, and in cases where 3 don't exist, I have added handlers to
 take care of those scenarios.
 
-~~I am currently working on looking at the country data for recommendations, and I will be updating this Readme as I progress further. 
+~~I am currently working on looking at the country data for recommendations, and I will be updating this Readme as I progress further~~.
 
 
 ## **Recommendations Based On Country**
