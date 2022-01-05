@@ -1,4 +1,3 @@
-import pandas as pd
 import json
 from itertools import chain
 from countryinfo import CountryInfo
@@ -34,6 +33,11 @@ def removeWhitespaceInStrings(wordList):  # to handle cases when the country nam
     return [x.strip() for x in wordList]
 
 
+def writeDictToJson(infoDict):
+    with open('./countryinfo.json', 'w') as fp:
+        json.dump(infoDict, fp)
+
+
 def reformatCountryNames(name):
     if name == 'east germany' or name == 'west germany':
         return 'germany'
@@ -53,5 +57,9 @@ def reformatCountryNames(name):
 if __name__ == '__main__':
     path = './data.json'
     countryInfoDict = createCountryInfoDict(path)
-    print(countryInfoDict.keys())
+    # print(countryInfoDict.keys())
+    writeDictToJson(countryInfoDict)
+
+    # TODO: Drawbacks of countryinfo module results in the need for the reformatCountryNames function
+    # TODO: A more elegant way of data cleaning (?)
 
